@@ -13,3 +13,5 @@ Parsing of response strings received from the inverter, this is done in two form
 A list of instructions known is also in the module, no doubt there's more but these were the ones I gleaned from Sorin/4lex/Raiki @ whirlpool.net.au
 
 DeltaPVOutput - simply queries the inverter and posts the result to PVOutput.org
+You will need to insert your systemID and API Key naturally
+Run via crontab to poll periodically
