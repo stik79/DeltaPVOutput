@@ -1,0 +1,49 @@
+1)
+If starting from a fresh wheezy install make sure you configure the following on first startup:
+keyboard - make sure you set it to US if you have one - otherwise the pain of pound signs instead of # will ensue
+locale - set to en_au_utf8
+timezone - set appropriately
+ssh - enable it if you're going to be running headless
+
+2) get apt-get up to date by issuing a 
+$ sudo apt-get update
+
+3) get git-core from apt-get
+$ sudo apt-get install git-core
+apt-get will confirm all the dependencies etc - kiss goodbye to 13-14MB 
+
+4) drag your rpi to the latest firmware using hexxeh's rpi-update tool - follow his instructions from his github: https://github.com/Hexxeh/rpi-update
+
+5) once rpi-update is installed give it a run
+$ sudo rpi-update
+
+6) reboot
+$ sudo reboot
+
+7) after rebooting grab python-serial
+$ sudo apt-get install python-serial
+
+8) grab DeltaPVOutput
+$ git clone git://github.com/stik79/DeltaPVOutput
+
+9) copy to /usr/local/bin
+$ sudo cp DeltaPVOutput/*.py /usr/local/bin
+
+10) Go there
+$ cd /usr/local/bin
+
+11) Edit the systemID/PVoutput key/Serial port
+$ sudo nano DeltaPVOutput.py
+
+12) give it a whirl
+$ python DeltaPVOutput.py
+
+13) If successful add to crontab in order to execute periodically
+$ sudo nano /etc/crontab
+
+add a line something like:
+0/5 * * * * root python /usr/local/bin/DeltaPVOutput.py 2>&1 > /var/log/solar.log
+
+Note the 0/5 denotes how often the script runs. If PVoutput period is set to 10 minutes - use 0/10
+
+14) Enjoy- if your RPi no longer works I had nothing to do with it
