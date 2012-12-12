@@ -63,4 +63,4 @@ if __name__ == '__main__':
         ret = subprocess.call (cmd)
     else:
         print "No response from inverter - shutdown? No Data sent to PVOutput.org"
-        connection.close()
+    connection.close()
