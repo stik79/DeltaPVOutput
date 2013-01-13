@@ -27,7 +27,7 @@ class DeltaInverter:
             '\x00\x08': ('Part',1,0,''),
             '\x00\x40': ('FW Version',10,0,''),                        
             '\x20\x05': ('AC Temp',0,1,'o'),
-            '\x21\x06': ('DC Temp',0,1,'o')
+            '\x21\x08': ('DC Temp',0,1,'o')
             };
 
 
