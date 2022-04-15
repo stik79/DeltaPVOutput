@@ -19,7 +19,7 @@ if __name__ == '__main__':
     #Edit your serial connection as required!!
     connection = serial.Serial('/dev/ttyUSB0',19200,timeout=0.2);
     localtime = time.localtime(time.time())   
- 
+
     t_date = 'd={0}'.format(strftime('%Y%m%d'))
     t_time = 't={0}'.format(strftime('%H:%M'))
 
@@ -54,14 +54,14 @@ if __name__ == '__main__':
         value = inv1.getValueFromResponse(response)
         t_temp = 'v5={0}'.format(value)
 
-	#if verbose mode
-	if parser_results.verbose_mode==True: 
-		sys.stderr.write('Date: %s, Time: %s\n' %(t_date, t_time))
-		sys.stderr.write('Energy Today: %sWh, Instantaneous Power: %sW\n' %(t_energy,t_power))
-		sys.stderr.write('Volts: %s, Temp: %s oC\n' % (t_volts,t_temp))
-		sys.stderr.flush()
+        #if verbose mode
+        if parser_results.verbose_mode==True: 
+            sys.stderr.write('Date: %s, Time: %s\n' %(t_date, t_time))
+            sys.stderr.write('Energy Today: %sWh, Instantaneous Power: %sW\n' %(t_energy,t_power))
+            sys.stderr.write('Volts: %s, Temp: %s oC\n' % (t_volts,t_temp))
+            sys.stderr.flush()
 
-	#Send it all off to PVOutput.org
+        #Send it all off to PVOutput.org
         cmd = ['/usr/bin/curl',
             '-d', t_date,
             '-d', t_time,
@@ -74,5 +74,6 @@ if __name__ == '__main__':
             'http://pvoutput.org/service/r1/addstatus.jsp']
         ret = subprocess.call (cmd)
     else:
-        print "No response from inverter - shutdown? No Data sent to PVOutput.org"
+        print ("No response from inverter - shutdown? No Data sent to PVOutput.org")
     connection.close()
+

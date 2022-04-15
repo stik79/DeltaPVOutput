@@ -37,7 +37,7 @@ class CRC16:
     0x4400, 0x84C1, 0x8581, 0x4540, 0x8701, 0x47C0, 0x4680, 0x8641,
     0x8201, 0x42C0, 0x4380, 0x8341, 0x4100, 0x81C1, 0x8081, 0x4040 )
 
-    def calcByte(self, ch, crc):
+    def calcByte(self, byte, crc):
         """Given a new Byte and previous CRC, Calc a new CRC-16"""
         if type(ch) == type("c"):
             by = ord( ch)
@@ -46,9 +46,10 @@ class CRC16:
         crc = (crc >> 8) ^ self.table[(crc ^ by) & 0xFF]
         return (crc & 0xFFFF)
     
-    def calcString(self, st, crc=INITIAL_DF1):
+    def calcString(self, data, crc=INITIAL_DF1):
         """Given a bunary string and starting CRC, Calc a final CRC-16 """
-        for ch in st:
-            crc = (crc >> 8) ^ self.table[(crc ^ ord(ch)) & 0xFF]
+        for byte in data:
+            crc = (crc >> 8) ^ self.table[(crc ^ byte) & 0xFF]
         return crc
 	
+
